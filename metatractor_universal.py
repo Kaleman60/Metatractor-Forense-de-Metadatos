@@ -79,4 +79,9 @@ def main():
         output = os.path.join(os.path.expanduser("-"), "Desktop", "informe-metadatos.json")
         with open(output, "w", indent=4)
 
-        print("")                
+        print("Analisis listo. Informe en: {output}")
+
+
+if __name__== "__main__":
+    main()
+
