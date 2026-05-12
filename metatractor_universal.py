@@ -10,7 +10,7 @@ from openpyxl import load_workbook
 def get_image_meta(path):
     meta = {}
     try: 
-        with Image.open(path) as imag:
+        with Image.open(path) as img:
             exif = img._getexif()
             if exif:
                 for tag, value in exif.items():
@@ -77,7 +77,8 @@ def main():
                 report[file] = get_office_meta(path)
 
         output = os.path.join(os.path.expanduser("-"), "Desktop", "informe-metadatos.json")
-        with open(output, "w", indent=4)
+        with open(output, "w", encoding="utf-8") as f:
+            json.dump(report,f, indent=4)
 
         print("Analisis listo. Informe en: {output}")
 
