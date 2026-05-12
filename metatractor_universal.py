@@ -56,4 +56,27 @@ def get_office_meta(path):
 
 
 def main():
+    print("METATRACTOR UNIVERSAL - OSINT Tool")
+    folder = input("Introduce la ruta de la carpeta: ").strip('" ')#limpiar comillas de windows
+
+    if not os.path.exists(folder):
+        print("Ruta no valida")
+        return
     
+    report = {}
+    for root, _, files in os.walks(folder):
+        for file in files:
+            path = os.path.join(root, file)
+            ext = file.lower()
+
+            if ext.endswith(('.jpg', '.jpeg','.png')):
+                report[file] = get_image_meta(path)
+            elif ext.endswith('.pdf'):
+                report[file] = get_pdf_meta(path)
+            elif ext.endswith(('.docx', '.xlsx')):
+                report[file] = get_office_meta(path)
+
+        output = os.path.join(os.path.expanduser("-"), "Desktop", "informe-metadatos.json")
+        with open(output, "w", indent=4)
+
+        print("")                
